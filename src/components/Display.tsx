@@ -29,7 +29,7 @@ const Display: React.FC<DisplayProps> = ({
             <div className="desc">/ person</div>
           </div>
           <div className="value">
-            {returnCurrencyAmt(`${calculatedTip / people || '0'}`)}
+            {returnCurrencyAmt(Number(`${calculatedTip / people || '0'}`))}
           </div>
         </div>
 
@@ -39,7 +39,7 @@ const Display: React.FC<DisplayProps> = ({
             <div className="desc">/ person</div>
           </div>
           <div className="value">
-            {returnCurrencyAmt(`${total / people || '0'}`)}
+            {returnCurrencyAmt(Number(`${total / people || '0'}`))}
           </div>
         </div>
       </div>
