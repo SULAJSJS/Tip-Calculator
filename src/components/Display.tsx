@@ -1,5 +1,11 @@
 /* eslint-disable react/jsx-filename-extension */
-function Display() {
+function Display({ total, calculatedTip, handleResetBtn, people }) {
+  const returnCurrencyAmt = (amt: string) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(amt);
+  };
   return (
     <div className="output">
       <div className="line-wrapper">
@@ -8,7 +14,9 @@ function Display() {
             <div className="title">Tip Amount</div>
             <div className="desc">/ person</div>
           </div>
-          <div className="value">1.00$</div>
+          <div className="value">
+            {returnCurrencyAmt(`${calculatedTip / people || '0'}`)}
+          </div>
         </div>
 
         <div className="line-output">
@@ -16,12 +24,20 @@ function Display() {
             <div className="title">Total</div>
             <div className="desc">/ person</div>
           </div>
-          <div className="value">4.00$</div>
+          <div className="value">
+            {returnCurrencyAmt(`${total / people || '0'}`)}
+          </div>
         </div>
       </div>
-      <button type="button" className="btn reset" disabled>
-        Reset
-      </button>
+      {total ? (
+        <button type="button" className="btn reset" onClick={handleResetBtn}>
+          Reset
+        </button>
+      ) : (
+        <button type="button" className="btn reset" disabled>
+          Reset
+        </button>
+      )}
     </div>
   );
 }

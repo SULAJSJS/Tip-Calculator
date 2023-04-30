@@ -18,6 +18,14 @@ function App() {
     }
   }, [bill, calculatedTip, people, tip]);
 
+  const handleResetBtn = () => {
+    setBill('');
+    setTip('');
+    setPeople('');
+    setCalculatedTip(0);
+    setTotal(0);
+  };
+
   return (
     <div className="container">
       <div className="logo">
@@ -32,7 +40,12 @@ function App() {
           people={people}
           setPeople={setPeople}
         />
-        <Display />
+        <Display
+          total={total}
+          calculatedTip={calculatedTip}
+          handleResetBtn={handleResetBtn}
+          people={people}
+        />
       </div>
     </div>
   );
