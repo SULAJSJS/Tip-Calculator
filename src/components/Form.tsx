@@ -1,3 +1,5 @@
+/* eslint-disable react/function-component-definition */
+import React from 'react';
 import Dollar from '../assets/icon-dollar.svg';
 import Person from '../assets/icon-person.svg';
 
@@ -29,12 +31,28 @@ interface Item {
   value: number;
 }
 
-function Form({ bill, setBill, tip, setTip, people, setPeople }) {
+interface FormProps {
+  bill: number;
+  setBill: (item: number) => void;
+  tip: number;
+  setTip: (item: number) => void;
+  people: number;
+  setPeople: (item: number) => void;
+}
+
+const Form: React.FC<FormProps> = ({
+  bill,
+  setBill,
+  tip,
+  setTip,
+  people,
+  setPeople,
+}) => {
   const handleSelectedTip = (item: Item) => {
-    setTip(item.value);
+    setTip(Number(item.value));
   };
   const handleSelectedCustom = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTip(e.target.value);
+    setTip(Number(e.target.value));
   };
 
   return (
@@ -51,7 +69,7 @@ function Form({ bill, setBill, tip, setTip, people, setPeople }) {
             id="inp-bill"
             placeholder="0.0"
             onInput={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setBill(+event.target.value)
+              setBill(Number(+event.target.value))
             }
             value={bill}
           />
@@ -63,7 +81,7 @@ function Form({ bill, setBill, tip, setTip, people, setPeople }) {
           <label htmlFor="inp-tip">Select Tip %</label>
         </div>
         <div className="btn-wrapper">
-          {list?.map((item, i) => (
+          {list?.map((item) => (
             <div
               onClick={() => handleSelectedTip(item)}
               onKeyUp={() => handleSelectedTip(item)}
@@ -101,7 +119,7 @@ function Form({ bill, setBill, tip, setTip, people, setPeople }) {
             id="inp-people"
             placeholder="1"
             onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setPeople(+e.target.value)
+              setPeople(Number(+e.target.value))
             }
             value={people}
           />
@@ -110,6 +128,6 @@ function Form({ bill, setBill, tip, setTip, people, setPeople }) {
       </div>
     </div>
   );
-}
+};
 
 export default Form;

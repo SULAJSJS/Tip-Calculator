@@ -5,9 +5,9 @@ import Form from './components/Form';
 import Display from './components/Display';
 
 function App() {
-  const [bill, setBill] = useState('');
-  const [tip, setTip] = useState('');
-  const [people, setPeople] = useState('');
+  const [bill, setBill] = useState<number>(0);
+  const [tip, setTip] = useState<number>(0);
+  const [people, setPeople] = useState<number>(0);
   const [calculatedTip, setCalculatedTip] = useState<number>(0);
   const [total, setTotal] = useState(0);
 
@@ -19,9 +19,9 @@ function App() {
   }, [bill, calculatedTip, people, tip]);
 
   const handleResetBtn = () => {
-    setBill('');
-    setTip('');
-    setPeople('');
+    setBill(0);
+    setTip(0);
+    setPeople(0);
     setCalculatedTip(0);
     setTotal(0);
   };

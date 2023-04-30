@@ -1,6 +1,20 @@
-/* eslint-disable react/jsx-filename-extension */
-function Display({ total, calculatedTip, handleResetBtn, people }) {
-  const returnCurrencyAmt = (amt: string) => {
+/* eslint-disable react/function-component-definition */
+import React from 'react';
+
+interface DisplayProps {
+  total: number;
+  calculatedTip: number;
+  handleResetBtn: () => void;
+  people: number;
+}
+
+const Display: React.FC<DisplayProps> = ({
+  total,
+  calculatedTip,
+  handleResetBtn,
+  people,
+}) => {
+  const returnCurrencyAmt = (amt: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -40,6 +54,6 @@ function Display({ total, calculatedTip, handleResetBtn, people }) {
       )}
     </div>
   );
-}
+};
 
 export default Display;
