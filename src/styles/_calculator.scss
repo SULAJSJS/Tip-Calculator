@@ -1,3 +1,13 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 .container {
   width: 100%;
   display: flex;
@@ -115,7 +125,12 @@
       }
 
       .inp-text {
-        width: 46%;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-align: center;
+        &::placeholder {
+          font-size: 20px;
+        }
       }
     }
   }
@@ -161,6 +176,7 @@
       font-size: 2rem;
       font-weight: 700;
       border-radius: 0.5rem;
+      border-style: none;
       padding: 1rem 0;
       margin-top: 3.4rem;
       transition: all 0.5s ease;

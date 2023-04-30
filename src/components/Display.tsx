@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-filename-extension */
-function OutputPart() {
+function Display() {
   return (
     <div className="output">
       <div className="line-wrapper">
@@ -8,7 +8,7 @@ function OutputPart() {
             <div className="title">Tip Amount</div>
             <div className="desc">/ person</div>
           </div>
-          <div className="value">$4.27</div>
+          <div className="value">1.00$</div>
         </div>
 
         <div className="line-output">
@@ -16,12 +16,14 @@ function OutputPart() {
             <div className="title">Total</div>
             <div className="desc">/ person</div>
           </div>
-          <div className="value">$32.79</div>
+          <div className="value">4.00$</div>
         </div>
       </div>
-      <div className="btn reset">Reset</div>
+      <button type="button" className="btn reset" disabled>
+        Reset
+      </button>
     </div>
   );
 }
 
-export default OutputPart;
+export default Display;
