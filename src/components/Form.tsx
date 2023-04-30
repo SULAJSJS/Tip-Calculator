@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 import React from 'react';
 import Dollar from '../assets/icon-dollar.svg';
 import Person from '../assets/icon-person.svg';

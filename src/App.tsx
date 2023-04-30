@@ -9,12 +9,12 @@ function App() {
   const [tip, setTip] = useState<number>(0);
   const [people, setPeople] = useState<number>(0);
   const [calculatedTip, setCalculatedTip] = useState<number>(0);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState<number>(0);
 
   useEffect(() => {
-    if (Number(bill) > 0 && Number(people) > 0 && Number(tip) > 0) {
-      setCalculatedTip((Number(bill) * (Number(tip) / 100)) / Number(people));
-      setTotal(calculatedTip + Number(bill));
+    if (bill > 0 && people > 0 && tip > 0) {
+      setCalculatedTip((bill * (tip / 100)) / people);
+      setTotal(calculatedTip + bill);
     }
   }, [bill, calculatedTip, people, tip]);
 
