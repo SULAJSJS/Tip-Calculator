@@ -1,6 +1,7 @@
 import React from 'react';
 import Dollar from '../assets/icon-dollar.svg';
 import Person from '../assets/icon-person.svg';
+import { FormProps } from '../types/types';
 
 const list = [
   {
@@ -30,28 +31,25 @@ interface Item {
   value: number;
 }
 
-interface FormProps {
-  bill: number;
-  setBill: (item: number) => void;
-  tip: number;
-  setTip: (item: number) => void;
-  people: number;
-  setPeople: (item: number) => void;
-}
-
 const Form: React.FC<FormProps> = ({
   bill,
   setBill,
-  tip,
   setTip,
   people,
   setPeople,
+  customTip,
+  setCustomTip,
+  activeIndex,
+  setActiveIndex,
 }) => {
-  const handleSelectedTip = (item: Item) => {
-    setTip(Number(item.value));
+  const handleSelectedTip = (item: Item, idx: number) => {
+    setTip(item.value);
+    setActiveIndex(idx);
+    setCustomTip('');
   };
   const handleSelectedCustom = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTip(Number(e.target.value));
+    setCustomTip(e.target.value);
+    setActiveIndex(5);
   };
 
   return (
@@ -68,9 +66,9 @@ const Form: React.FC<FormProps> = ({
             id="inp-bill"
             placeholder="0.0"
             onInput={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setBill(Number(+event.target.value))
+              setBill(Number(event.target.value))
             }
-            value={bill}
+            value={bill === 0 ? '' : bill}
           />
           <img src={Dollar} alt="dollar-icon" />
         </div>
@@ -80,14 +78,14 @@ const Form: React.FC<FormProps> = ({
           <label htmlFor="inp-tip">Select Tip %</label>
         </div>
         <div className="btn-wrapper">
-          {list?.map((item) => (
+          {list?.map((item, i) => (
             <div
-              onClick={() => handleSelectedTip(item)}
-              onKeyUp={() => handleSelectedTip(item)}
+              onClick={() => handleSelectedTip(item, i)}
+              onKeyUp={() => handleSelectedTip(item, i)}
               role="textbox"
               tabIndex={0}
               key={item.id}
-              className="btn tip"
+              className={activeIndex === i ? 'btn tip btn-active' : 'btn tip'}
             >
               {item.value}%
             </div>
@@ -101,26 +99,28 @@ const Form: React.FC<FormProps> = ({
             onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
               handleSelectedCustom(e)
             }
-            value={tip}
+            value={customTip}
           />
         </div>
       </div>
       <div className="people-container">
         <div className="label-wrapper">
           <label htmlFor="inp-people">Number of People</label>
-          <div className="error-msg">{people === 0 ? "Can't be zero" : ''}</div>
+          <div className="error-msg">
+            {Number(people) === 0 ? "Can't be zero" : ''}
+          </div>
         </div>
         <div className="inp-wrapper">
           <input
-            className="inp-text"
+            className={Number(people) === 0 ? 'inp-people' : 'inp-text'}
             type="number"
             name="inp-people"
             id="inp-people"
             placeholder="1"
             onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setPeople(Number(+e.target.value))
+              setPeople(Number(e.target.value))
             }
-            value={people}
+            value={people === 0 || '' ? ' ' : people}
           />
           <img src={Person} alt="person-icon" />
         </div>

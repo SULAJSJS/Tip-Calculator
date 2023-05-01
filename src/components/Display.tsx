@@ -1,24 +1,14 @@
 import React from 'react';
-
-interface DisplayProps {
-  total: number;
-  calculatedTip: number;
-  handleResetBtn: () => void;
-  people: number;
-}
+import { DisplayProps } from '../types/types';
 
 const Display: React.FC<DisplayProps> = ({
-  total,
   calculatedTip,
   handleResetBtn,
   people,
+  bill,
+  tip,
+  customTip,
 }) => {
-  const returnCurrencyAmt = (amt: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(amt);
-  };
   return (
     <div className="output">
       <div className="line-wrapper">
@@ -28,7 +18,11 @@ const Display: React.FC<DisplayProps> = ({
             <div className="desc">/ person</div>
           </div>
           <div className="value">
-            {returnCurrencyAmt(Number(`${calculatedTip / people || '0'}`))}
+            $
+            {Number.isNaN(Number(calculatedTip) / Number(people)) ||
+            Number(calculatedTip) / Number(people) === Infinity
+              ? '0.00'
+              : (calculatedTip / Number(people)).toFixed(2)}
           </div>
         </div>
 
@@ -38,11 +32,15 @@ const Display: React.FC<DisplayProps> = ({
             <div className="desc">/ person</div>
           </div>
           <div className="value">
-            {returnCurrencyAmt(Number(`${total / people || '0'}`))}
+            $
+            {Number.isNaN(Number(bill) / Number(people)) ||
+            Number(bill) / Number(people) === Infinity
+              ? '0.00'
+              : (Number(bill) / Number(people)).toFixed(2)}
           </div>
         </div>
       </div>
-      {total ? (
+      {Number(bill || tip || customTip || people) > 0 ? (
         <button type="button" className="btn reset" onClick={handleResetBtn}>
           Reset
         </button>

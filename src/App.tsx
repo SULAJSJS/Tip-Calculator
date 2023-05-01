@@ -5,25 +5,32 @@ import Form from './components/Form';
 import Display from './components/Display';
 
 function App() {
-  const [bill, setBill] = useState<number>(0);
-  const [tip, setTip] = useState<number>(0);
-  const [people, setPeople] = useState<number>(0);
+  const [bill, setBill] = useState<string | number>(0);
+  const [tip, setTip] = useState<string | number>(0);
+  const [customTip, setCustomTip] = useState<string | number>('');
+  const [people, setPeople] = useState<string | number>(1);
   const [calculatedTip, setCalculatedTip] = useState<number>(0);
-  const [total, setTotal] = useState<number>(0);
+  const [activeIndex, setActiveIndex] = useState(5);
 
   useEffect(() => {
-    if (bill > 0 && people > 0 && tip > 0) {
-      setCalculatedTip((bill * (tip / 100)) / people);
-      setTotal(calculatedTip + bill);
+    if (
+      Number(bill) > 0 &&
+      Number(people) > 0 &&
+      Number(customTip || tip) > 0
+    ) {
+      setCalculatedTip(
+        (Number(bill) * (Number(customTip || tip) / 100)) / Number(people)
+      );
     }
-  }, [bill, calculatedTip, people, tip]);
+  }, [bill, calculatedTip, people, tip, customTip]);
 
   const handleResetBtn = () => {
-    setBill(0);
-    setTip(0);
-    setPeople(0);
+    setBill('');
+    setTip('');
+    setCustomTip('');
+    setPeople(1);
     setCalculatedTip(0);
-    setTotal(0);
+    setActiveIndex(5);
   };
 
   return (
@@ -35,16 +42,21 @@ function App() {
         <Form
           bill={bill}
           setBill={setBill}
-          tip={tip}
           setTip={setTip}
           people={people}
           setPeople={setPeople}
+          customTip={customTip}
+          setCustomTip={setCustomTip}
+          activeIndex={activeIndex}
+          setActiveIndex={setActiveIndex}
         />
         <Display
-          total={total}
           calculatedTip={calculatedTip}
           handleResetBtn={handleResetBtn}
           people={people}
+          bill={bill}
+          tip={tip}
+          customTip={customTip}
         />
       </div>
     </div>

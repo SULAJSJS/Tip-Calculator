@@ -6,6 +6,7 @@ input::-webkit-inner-spin-button {
 
 input[type='number'] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .container {
@@ -35,7 +36,7 @@ input[type='number'] {
   padding: 2.5rem;
 
   .input {
-    //border: 1px solid magenta; //temporary
+    // border: 1px solid magenta; //temporary
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -57,7 +58,7 @@ input[type='number'] {
         color: indianred;
         font-weight: 700;
         font-size: 1.5rem;
-        opacity: 0;
+        opacity: 1;
       }
 
       .show-error-msg {
@@ -79,8 +80,25 @@ input[type='number'] {
       padding: 0.5rem 2.4rem;
 
       &:focus {
-        outline: none;
-        border: 2px solid $strong-cyan;
+        border: none;
+        outline: 2px solid $strong-cyan;
+      }
+    }
+    .inp-people {
+      background-color: $light-grayish-cyan-2;
+      border: none;
+      width: 100%;
+      border-radius: 0.5rem;
+      color: $very-dark-cyan;
+      font-family: 'Space Mono', monospace;
+      font-size: 2.4rem;
+      font-weight: 700;
+      text-align: right;
+      padding: 0.5rem 2.4rem;
+
+      &:focus {
+        border: none;
+        outline: 2px solid red;
       }
     }
 
@@ -90,7 +108,7 @@ input[type='number'] {
       img {
         position: absolute;
         left: 2.4rem;
-        top: 1.5rem;
+        top: 1.1rem;
       }
     }
 
@@ -113,9 +131,10 @@ input[type='number'] {
         border-radius: 0.5rem;
         padding: 0.6rem 0;
         transition: all 0.5s ease;
-
+        cursor: pointer;
         &:hover {
-          background-color: $btn-hover;
+          color: $very-dark-cyan;
+          background-color: $strong-cyan;
         }
       }
 
